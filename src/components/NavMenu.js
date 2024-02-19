@@ -5,7 +5,7 @@ import logoImage from './acterio_icon.svg';
 
 const Navbar = () => {
   return (
-    <AppBar maxWidth="lg" position="static" style={{  backgroundColor: '#162f46', color: '#eaf2f5' }}>
+    <AppBar maxWidth="lg" position="sticky" style={{  backgroundColor: '#162f46', color: '#eaf2f5' }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
         <Link to="/">

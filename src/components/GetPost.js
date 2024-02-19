@@ -11,7 +11,7 @@ function GetPost() {
   useEffect (() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('https://dummyjson.com/posts?limit=0');
+        const response = await fetch('https://dummyjson.com/posts');
         const data = await response.json();
         setPosts(data.posts);
       }
@@ -36,7 +36,6 @@ function GetPost() {
     posts.body.toLowerCase().includes(searchFilter.toLowerCase()) ||
     posts.tags.some(tag => tag.toLowerCase().includes(searchFilter.toLowerCase()))
   );
-
 
   //PREVIEW OF BODY TEXT
   const previewBody = (body, maxLength) => {
@@ -89,10 +88,9 @@ function GetPost() {
     }
   };
 
-
   return(
     <Container maxWidth="lg"> 
-        <div className="blogPostsHeader" style={{ position: 'sticky', textAlign: 'center' }}>
+        <div className="blogPostsHeader" style={{ textAlign: 'center' }}>
           <h1>Acterio Blog Posts</h1>
           <input
             type="text"

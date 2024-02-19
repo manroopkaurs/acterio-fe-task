@@ -44,7 +44,6 @@ h1{
     padding: 10px;
     color: #eaf2f5;
     display: inline-block;
-
 }
 
 .postFooter{
@@ -52,6 +51,7 @@ h1{
     display: flex;
     justify-content: space-between;
     height: 45px;
+    
 }
 
 .postFooter .reactBtn:hover{

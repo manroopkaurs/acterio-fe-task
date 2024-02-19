@@ -29,10 +29,7 @@ function OnePost(){
         <Container 
           maxWidth="md"
           className='onePost' 
-          style={{ 
-            backgroundColor: '#eaf2f5',  
-            borderRadius: '50px', 
-            padding: '9vh'
+          style={{ backgroundColor: '#eaf2f5', borderRadius: '50px', padding: '9vh'
           }}>
           <div className='onePostHeader'>
             <h1>
