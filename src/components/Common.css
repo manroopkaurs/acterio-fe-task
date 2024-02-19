@@ -1,0 +1,15 @@
+.btn {
+    background-color: '#0c3b2e'; 
+    color: '#fff';
+}
+
+.header{
+    background-color: #0c3b2e;
+    height: 10lh;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    
+}
