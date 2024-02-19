@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/acteriofetask/static/css/main.8925b8f4.css",
+    "main.js": "/acteriofetask/static/js/main.fa2b4f87.js",
+    "static/media/acterio_icon.svg": "/acteriofetask/static/media/acterio_icon.c9d15c664f2886ba6689e34541c0c3fe.svg",
+    "index.html": "/acteriofetask/index.html",
+    "main.8925b8f4.css.map": "/acteriofetask/static/css/main.8925b8f4.css.map",
+    "main.fa2b4f87.js.map": "/acteriofetask/static/js/main.fa2b4f87.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8925b8f4.css",
+    "static/js/main.fa2b4f87.js"
+  ]
+}
