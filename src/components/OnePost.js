@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; 
 import { Container } from '@mui/material';
+import './Common.css';
 
 function OnePost(){
     const { id } = useParams();
@@ -21,19 +22,43 @@ function OnePost(){
       }, [id]);
 
       if (!posts) {
-        return <div>Loading...</div>;
+        return <div>Loading post...</div>;
       }
     
       return (
-        <Container maxWidth="lg">
-        <div className='header'>
-          <h1>{posts.title}</h1>
-        </div>
-        <div>
-        <h3> {posts.tags.join(' ')}</h3>
-          <p>{posts.body}</p>
-          <p> Reactions: {posts.reactions} </p>
-        </div>
+        <Container 
+          maxWidth="md"
+          className='onePost' 
+          style={{ 
+            backgroundColor: '#eaf2f5',  
+            borderRadius: '50px', 
+            padding: '9vh'
+          }}>
+          <div className='onePostHeader'>
+            <h1>
+              {posts.title}
+            </h1>
+          </div>
+          <div className='onePostInfo'>
+            <h4> 
+              {posts.tags.join(' || ')}
+            </h4>
+            <h4> 
+              Reactions: {posts.reactions} 
+            </h4>
+          </div>
+          <div className='blogPost' maxWidth="xs">
+            <p>
+              {posts.body}
+            </p>
+          </div>
+          <div className='onePostUserInfo'>
+            <h4> 
+              Post Id: {posts.id}
+              <br/>
+              User Id: {posts.userId} 
+            </h4>
+          </div>
         </Container>
       );
 }

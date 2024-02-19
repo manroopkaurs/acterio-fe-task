@@ -1,17 +1,20 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import logoImage from './acterio_icon.svg';
 
 const Navbar = () => {
   return (
-    <AppBar maxWidth="lg" position="static" style={{  backgroundColor: '#0c3b2e', color: '#fff' }}>
+    <AppBar maxWidth="lg" position="static" style={{  backgroundColor: '#162f46', color: '#eaf2f5' }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Acterio Blog Post
+        <Link to="/">
+          <img src={ logoImage } alt="Logo" style={{ width: '100px', height: '50px' }} />
+        </Link>
         </Typography>
         <div>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit', marginRight: '20px' }}>Home</Link>
-          <Link to="/posts" style={{ textDecoration: 'none', color: 'inherit' }}>Posts</Link>
+          <Link to="/" className="nav-link" style={{ textDecoration: 'none', color: 'inherit', marginRight: '20px' }}>Home</Link>
+          <Link className="nav-link" to="/posts" style={{ textDecoration: 'none', color: 'inherit' }}>Posts</Link>
         </div>
       </Toolbar>
     </AppBar>

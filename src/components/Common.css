@@ -1,15 +1,77 @@
-.btn {
-    background-color: '#0c3b2e'; 
-    color: '#fff';
-}
-
-.header{
-    background-color: #0c3b2e;
-    height: 10lh;
-    color: white;
+.homepageHeader{
+    padding: 5vh;
+    margin: 5vh;
     border-radius: 20px;
     text-align: center;
-    align-content: center;
-    justify-content: center;
-    
+    background-color: #eaf2f5;
+    color: #19314b;   
+    text-transform: capitalize;
+    font-size: larger; 
+}
+
+.homepageText{
+    padding: 5vh;
+    margin: 5vh;
+    border-radius: 20px;
+    background-color: #eaf2f5;
+    color: #19314b;   
+}
+
+.homepageText h3{
+    text-align: center;
+}
+
+h1{
+    color: #19314b; 
+}
+
+.postTitle{
+    background-color: #19314b;
+    border-radius: 5px;
+    padding: 10px;
+    color: #eaf2f5;
+}
+
+.postIds{
+    display: flex;
+    justify-content: space-between;
+}
+
+.postTags{
+    text-transform: capitalize;
+    background-color: #19314b;
+    border-radius: 5px;
+    padding: 10px;
+    color: #eaf2f5;
+    display: inline-block;
+
+}
+
+.postFooter{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+}
+
+.postFooter .reactBtn:hover{
+    background-color: #19314b;
+    color: #eaf2f5;
+}
+
+
+.onePost{
+    margin: 5vh;
+    margin: 5vw; 
+}
+
+.onePostInfo{
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+
+.blogPost{
+    line-height: 2.5;
+    padding: 4vh;
 }

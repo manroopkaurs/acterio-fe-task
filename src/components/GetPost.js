@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Container } from '@mui/material';
+import { Grid, Container, Button } from '@mui/material';
+import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
 import './Common.css';
 
 function GetPost() {
-
   const [ posts, setPosts ] = useState([]);
   const [ searchFilter, setSearchFilter ] = useState('');
 
   useEffect (() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('https://dummyjson.com/posts');
+        const response = await fetch('https://dummyjson.com/posts?limit=0');
         const data = await response.json();
         setPosts(data.posts);
       }
       catch (error) {
         console.log(error);
-      };
-    }
+      }
+    };
     fetchPosts();
   }, []);
+
+  if (!posts) {
+    return <div>Loading post...</div>;
+  }
 
   //SEARCHFILTER
   const handleSearchFilter = (event) => {
@@ -33,6 +37,7 @@ function GetPost() {
     posts.tags.some(tag => tag.toLowerCase().includes(searchFilter.toLowerCase()))
   );
 
+
   //PREVIEW OF BODY TEXT
   const previewBody = (body, maxLength) => {
     if (body.length <= maxLength) {     
@@ -43,9 +48,15 @@ function GetPost() {
 
   //ADD REACTIONS
   const addReactions = async (postID) => {
+    const reactionIndex = posts.findIndex(post => post.id === postID);
+    if(posts[reactionIndex].reactionIncremented) {
+      console.log('Reaction count has been increased');
+      return;
+    }
+
     const updatedPost = posts.map(posts => {
       if(posts.id === postID){
-        return { ...posts, reactions: posts.reactions + 1 };
+        return { ...posts, reactions: posts.reactions + 1, reactionIncremented: true };
       }
       return posts;
     });
@@ -55,7 +66,7 @@ function GetPost() {
       await fetch(`https://dummyjson.com/posts/${postID}`, {
         method: 'PUT',
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ reactions: updatedPost.find(posts => posts.id === postID).reactions }),
+        body: JSON.stringify({ reactions: updatedPost[reactionIndex].reactions }),
       });
       console.log('reaction count updated');
     }
@@ -81,31 +92,89 @@ function GetPost() {
 
   return(
     <Container maxWidth="lg"> 
-        <div style={{ marginBottom: 20 }}>
-          <h1>ALL BLOG POSTS</h1>
+        <div className="blogPostsHeader" style={{ position: 'sticky', textAlign: 'center' }}>
+          <h1>Acterio Blog Posts</h1>
           <input
             type="text"
             value={searchFilter}
             onChange={handleSearchFilter}
             placeholder="Search for titles, text and tags"
-            style={{ padding: 8, fontSize: 16, width: '100%', boxSizing: 'border-box' }}
+            style={{  fontStyle: 'italic' , fontFamily: 'Cutive', 
+                      padding: 8, fontSize: 16, width: '100%', 
+                      borderRadius: '5px', backgroundColor: '#eaf2f5', color: '#19314b' 
+                    }}
           />
         </div>
 
-        <Grid container spacing={12}>
+        <Grid style={{ marginTop: '0'}} container spacing={3}>
           {filteredPosts.map((posts) => (
-            <Grid item key={posts.id} xs={12} sm={8} md={4}> 
-              <div style={{ border: '1px solid #ccc', borderRadius: 5, padding: 10, backgroundColor: '#f0e2ce' }}>
-                <h3>{posts.title}</h3>
-                <p>{previewBody(posts.body, 100)}</p>
-                <p>Tags: <br/>{posts.tags.join(' ')}</p>
-                <p> Reactions: {posts.reactions} <button className='btn' onClick={() => addReactions(posts.id)}> + </button></p>
-                <Link to={`/posts/${posts.id}`}>
-                  <button className='btn'>View Post</button>
-                </Link>
-                <br/>
-                <button className='btn' onClick={() => handleDeletePost(posts.id)}>Delete</button>
-              </div>
+            <Grid item key={posts.id} xs={12} sm={6} md={4}> 
+                <Container style={{ border: '15px solid #eaf2f5', borderRadius: 5, 
+                                    padding: 10, backgroundColor: '#eaf2f5', color: '#19314b'
+                                    }}>
+                  <div className='postTitle'>
+                    <h2>
+                      {posts.title}
+                    </h2>
+                  </div>
+                
+                  <div className='postBody'>
+                    <p>
+                      {previewBody(posts.body, 75)} 
+                      <Link 
+                        to={`/posts/${posts.id}`} 
+                        style={{ 
+                          color: '#162f46', 
+                          textDecoration: 'underline',
+                          fontWeight: 'bolder'
+                        }}>
+                        Read More
+                      </Link>                     
+                    </p>
+                  </div>
+
+                  <div className='postIds'>
+                    <p>Post: {posts.id}</p>
+                    <p>User: {posts.userId}</p>
+                  </div>
+                
+
+                  <p className='postTags'>
+                    {posts.tags.join(' || ')}
+                  </p>
+                
+                  <div className='postFooter'>
+                    <Button 
+                        variant="contained" 
+                        className='deleteBtn' 
+                        onClick={() => handleDeletePost(posts.id)}
+                        sx={{
+                            textTransform: 'none',
+                            fontFamily: 'Cutive', 
+                            backgroundColor: '#eaf2f5',
+                            color: '#19314b',
+                            border: '#19314b solid 1px',
+                          '&:hover': {
+                            backgroundColor: '#19314b',
+                            color: '#eaf2f5'
+                           
+                          }
+                        }}
+                      >
+                        Remove Post
+                    </Button>
+                    <Button
+                      className='reactBtn'
+                      onClick={() => addReactions(posts.id)}
+                      disabled={posts.reactionIncremented} 
+                      style={{ fontSize: '18px'}}
+                      sx={{ color: posts.reactionIncremented ? 'red' : 'gray' }}
+                    > 
+                      <p style={{ color: posts.reactionIncremented ? '#19314b' : 'gray'}} >{posts.reactions}</p>
+                      <FavoriteSharpIcon className='reactBtn' style={{ color: posts.reactionIncremented ? 'red' : 'gray' }}/> 
+                    </Button>                                          
+                  </div>
+                </Container>
             </Grid>
             ))}
         </Grid>
